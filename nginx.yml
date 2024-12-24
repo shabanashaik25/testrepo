@@ -1,18 +1,10 @@
 version: 0.2
 
 phases:
-
-  install:
-    commands:
-      - echo Installing Docker...
-      - yum install -y docker
-      - service docker start
-      - docker info  # Check Docker installation
-      - echo Logging in to Docker Hub...
-      - echo Shab@2025 | docker login --username shabanashaik --password-stdin
-
   pre_build:
     commands:
+      - echo Logging in to Docker Hub...
+      - echo Shab@2025 | docker login --username shabanashaik --password-stdin
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
       - echo Pulling Nginx image from Docker Hub...
