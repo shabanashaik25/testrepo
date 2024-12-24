@@ -21,8 +21,11 @@ phases:
     commands:
       - echo Pushing Nginx image to Amazon ECR...
       - docker push $REPOSITORY_URI/nginx:$IMAGE_TAG
+      - printf '[{"name":"genui","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+
 
 artifacts:
   files: 
     - '**/*'
+    -  imagedefinitions.json
   discard-paths: yes
