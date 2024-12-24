@@ -1,7 +1,8 @@
 version: 0.2
 
 phases:
-    install:
+
+  install:
     commands:
       - echo Installing Docker...
       - yum install -y docker
@@ -10,7 +11,6 @@ phases:
       - echo Logging in to Docker Hub...
       - echo Shab@2025 | docker login --username shabanashaik --password-stdin
 
- 
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
