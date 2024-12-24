@@ -9,18 +9,18 @@ phases:
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
       - echo Pulling Nginx image from Docker Hub...
       - docker pull nginx:latest
-      - REPOSITORY_URI=985539776723.dkr.ecr.ap-south-1.amazonaws.com/myr/gen
+      - REPOSITORY_URI=985539776723.dkr.ecr.ap-south-1.amazonaws.com/myr
       - IMAGE_TAG=latest
       
   build:
     commands:
       - echo Tagging Nginx image for ECR...
-      - docker tag nginx:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPOSITORY_URI/nginx:$IMAGE_TAG
+      - docker tag nginx:latest $REPOSITORY_URI/nginx:$IMAGE_TAG
 
   post_build:
     commands:
       - echo Pushing Nginx image to Amazon ECR...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPOSITORY_URI/nginx:$IMAGE_TAG
+      - docker push $REPOSITORY_URI/nginx:$IMAGE_TAG
 
 artifacts:
   files: 
